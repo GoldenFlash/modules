@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style type="text/css">
+    .tab li {
+        float: left;
+        width: 50px;
+        height: 20px;
+        list-style: none;
+    }
+
+    .tab .header:after {
+        content: '';
+        display: block;
+        clear: both;
+    }
+
+    .content li {
+        width: 200px;
+        height: 200px;
+        border: solid 1px red;
+        position: absolute;
+        display: none;
+    }
+
+    .content .current {
+        display: block;
+    }
+
+    .tab .active {
+        background-color: red;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="tab">
+        <ul class="header">
+            <li class="active">选项一</li>
+            <li>选项二</li>
+            <li>选项三</li>
+            <li>选项四</li>
+        </ul>
+        <ul class="content">
+            <li class="current">内容一</li>
+            <li>内容二</li>
+            <li>内容三</li>
+            <li>内容四</li>
+        </ul>
+    </div>
+    <script type="text/javascript" src="dist/bundle.js"></script>
+</body>
+</html>
