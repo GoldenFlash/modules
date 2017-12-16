@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style type="text/css">
+    .tab li {
+        float: left;
+        width: 50px;
+        height: 20px;
+        list-style: none;
+    }
+
+    .tab .header:after {
+        content: '';
+        display: block;
+        clear: both;
+    }
+
+    .content li {
+        width: 200px;
+        height: 200px;
+        border: solid 1px red;
+        position: absolute;
+        display: none;
+    }
+
+    .content .current {
+        display: block;
+    }
+
+    .tab .active {
+        background-color: red;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="tab">
+        <ul class="header">
+            <li class="active">选项一</li>
+            <li>选项二</li>
+            <li>选项三</li>
+            <li>选项四</li>
+        </ul>
+        <ul class="content">
+            <li class="current">内容一</li>
+            <li>内容二</li>
+            <li>内容三</li>
+            <li>内容四</li>
+        </ul>
+    </div>
+    <script type="text/javascript">
+    	var opts = {
+    		element:'.tab',
+    		cartSelector:'.header',
+    		contentSelector:'.content',
+    		activeClassName:'active',
+    		currentClassName:'current'
+    	}
+
+	    var Tab = function(options) {
+	    	var that = this
+	    	that.index = 1;
+	    	this.events = {};
+	    	this.init(options);
+	    	
+	        this.tab = document.querySelector(this.element)
+	     	
+	        this.tabCart = this.tab.querySelectorAll(this.cartSelector+' li')
+	        
+	        this.contentCart = this.tab.querySelectorAll(this.contentSelector+' li')
+
+	        this.header = this.tab.children[0]
+	        
+	       
+	       this.header.addEventListener('click',function(e){
+	       		that.clickfn(e)
+	       })
+	    }
+	    Tab.prototype.init = function(options){
+	    	for (var key in options){
+	    		this[key] = options[key];
+	    		
+	    	}
+	    };
+
+	    Tab.prototype.clickfn = function(e){
+
+	    	var that = this
+	    	
+	        that.index = [].indexOf.apply(that.tabCart, [e.target])
+
+	        that.tabCart[that.index].classList.add(that.activeClassName)
+
+	        for (var i = 0; i < that.tabCart.length; i++) {
+	            if (that.tabCart[i] != that.tabCart[that.index]) {
+	                that.tabCart[i].classList.remove(that.activeClassName)
+	               
+	            }
+	        }
+
+	        that.contentCart[that.index].classList.add(that.currentClassName)
+
+	        for (var i = 0; i < that.contentCart.length; i++) {
+	            if (that.contentCart[i] != that.contentCart[that.index]) {
+	                that.contentCart[i].classList.remove(that.currentClassName)
+
+	            }
+	        }
+	    }
+	    
+	    new Tab(opts)
+    </script>
+</body>
+
+</html>
