@@ -60,20 +60,24 @@ module.exports= {
 			},
 			{
 				test:/\.scss$/,
-				use:ExtractTextPlugin.extract({
-					fallback:'style-loader',
-					use:[
-						'css-loader',
-						{
-							loader:'sass-loader',
-							// options:{
-							// 	sourceMap:true
-							// }
-						}
-
-					]
-				})
+					use:['style-loader','css-loader','sass-loader']
 			},
+			// 	{
+			// 	test:/\.scss$/,
+			// 	use:ExtractTextPlugin.extract({
+			// 		fallback:'style-loader',
+			// 		use:[
+			// 			'css-loader',
+			// 			{
+			// 				loader:'sass-loader',
+			// 				// options:{
+			// 				// 	sourceMap:true
+			// 				// }
+			// 			}
+
+			// 		]
+			// 	})
+			// },
 			{
 				test:/\.js$/,
 				exclude:['node_modules'],//除了 node_modules文件夹
