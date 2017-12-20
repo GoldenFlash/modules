@@ -82,9 +82,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__style_carousel_scss__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__style_carousel_scss___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__style_carousel_scss__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__carousel_carousel_js__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__toTop_toTop_js__ = __webpack_require__(7);
 // import { carousel as carousel} from'../../tab/tab.js'
 // new tab()
 
+
+// import {toTop as toTop} from '../../toTop/toTop.js' 
 
 new __WEBPACK_IMPORTED_MODULE_1__carousel_carousel_js__["a" /* default */]();
 
@@ -717,7 +720,9 @@ class Carousel {
 	pre() {
 
 		this.imgCtLeft += this.imgWidth;
+
 		this.imgCt.style.left = this.imgCtLeft + 'px';
+
 		if (this.imgCtLeft == this.imgWidth) {
 			this.imgCtLeft = -this.imgCtLeft * (this.img.length - 1);
 			this.imgCt.style.left = this.imgCtLeft + 'px';
@@ -726,7 +731,7 @@ class Carousel {
 	next() {
 
 		this.imgCtLeft -= this.imgWidth;
-		console.log(this.imgCtLeft);
+
 		this.imgCt.style.left = this.imgCtLeft + 'px';
 		if (this.imgCtLeft == -this.imgWidth * (this.img.length + 1)) {
 			this.imgCtLeft = -this.imgWidth;
@@ -753,6 +758,99 @@ class Carousel {
 }
 /* harmony export (immutable) */ __webpack_exports__["a"] = Carousel;
 
+
+/***/ }),
+/* 7 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* unused harmony export toTop */
+var ToTop = function () {
+  this.templete = `<div id="gototop">
+        	<div class="top"></div>
+        	<div class="bottom">
+            <span>
+                回到
+                顶部
+            </span>
+        	</div>
+    	</div>
+   	 `;
+  this.style = `
+   	 	#gototop{
+           
+            height:100px;
+            width:100px;
+           display:none;
+            position:fixed;
+            right:0;
+            bottom: 0;
+            transform:translateY(-50%) ;
+            /*border-left:none;*/
+        }
+		#gototop .top {
+            position: absolute;
+            left:50%;
+            top:0%;
+            transform:translateX(-50%) ;
+            height:0px;
+            width:0px;
+            border:solid #7C7777 50px;
+            border-top: none;
+            border-left:solid 50px  transparent;
+            border-right:solid 50px  transparent;
+        }
+        #gototop .bottom {
+            position: absolute;
+            left:50%;
+            bottom:0%;
+
+            transform:translateX(-50%) ;
+            height:50px;
+            width:40px;
+            border:solid #7C7777 5px;
+            
+            text-align: center;
+            vertical-align:middle;
+            
+        }
+        #gototop .bottom span{
+            margin-top: 3px;
+            display: inline-block;
+        }
+   	 	`;
+  var that = this;
+  this.creatElement('div', this.templete, 'body');
+  this.creatElement('style', this.style, 'head');
+  this.toTopBtn = document.querySelector('#gototop');
+  window.addEventListener('scroll', function () {
+    that.show();
+  });
+  this.toTopBtn.addEventListener('click', function () {
+    that.goTop();
+  });
+};
+ToTop.prototype.creatElement = function (el, content, parentNode) {
+  var parent = document.querySelector(parentNode);
+  var node = document.createElement(el);
+
+  node.innerHTML = content;
+  parent.appendChild(node);
+};
+ToTop.prototype.show = function () {
+
+  var scrollTop = document.documentElement.scrollTop;
+  if (scrollTop > 100) {
+
+    this.toTopBtn.style.display = 'block';
+  } else {
+    this.toTopBtn.style.display = 'none';
+  }
+};
+ToTop.prototype.goTop = function () {
+  document.documentElement.scrollTop = 0;
+};
+var toTop = new ToTop();
 
 /***/ })
 /******/ ]);
